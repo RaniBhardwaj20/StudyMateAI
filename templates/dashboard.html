@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - StudyMate AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+
+<body class="dashboard-page">
+
+    <div class="dashboard-container">
+
+
+        <!-- =========================================
+             CENTERED HEADER
+        ========================================== -->
+
+        <div class="dashboard-header">
+
+            <h1>🎓 Welcome to StudyMate AI</h1>
+
+            <p>Your AI-powered smart study assistant</p>
+
+        </div>
+
+
+
+        <!-- =========================================
+             MY STUDY MATERIALS
+        ========================================== -->
+
+        <div class="upload-card">
+
+            <div class="upload-heading">
+
+                <h2>📚 My Study Materials</h2>
+
+                <p>
+                    Upload one PDF and use it for your AI-powered study tools.
+                </p>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 NO PDF UPLOADED
+            ====================================== -->
+
+            {% if not current_pdf %}
+
+            <form action="/upload"
+                  method="POST"
+                  enctype="multipart/form-data"
+                  class="upload-form"
+                  id="upload-form">
+
+                <label for="pdf-file"
+                       class="feature-button select-button">
+
+                    📄 Select PDF
+
+                </label>
+
+                <input type="file"
+                       id="pdf-file"
+                       name="pdf_file"
+                       accept=".pdf"
+                       hidden
+                       required>
+
+                <span id="file-name">
+
+                    No file selected
+
+                </span>
+
+
+                <button type="submit"
+                        class="feature-button upload-button">
+
+                    Upload PDF
+
+                </button>
+
+            </form>
+
+
+            <!-- =====================================
+                 PDF ALREADY UPLOADED
+            ====================================== -->
+
+            {% else %}
+
+            <div class="upload-form current-upload">
+
+
+                <!-- CURRENT PDF -->
+
+                <div class="current-pdf">
+
+                    <span class="pdf-icon">📄</span>
+
+                    <strong>Current PDF:</strong>
+
+                    <span>
+                        {{ current_pdf }}
+                    </span>
+
+                </div>
+
+
+
+                <!-- REPLACE PDF -->
+
+                <form action="/upload"
+                      method="POST"
+                      enctype="multipart/form-data"
+                      id="replace-form">
+
+                    <label for="replace-file"
+                           class="feature-button replace-button">
+
+                        🔄 Replace PDF
+
+                    </label>
+
+                    <input type="file"
+                           id="replace-file"
+                           name="pdf_file"
+                           accept=".pdf"
+                           hidden
+                           required>
+
+                </form>
+
+
+
+                <!-- REMOVE PDF -->
+
+                <form action="/clear-pdf"
+                      method="POST"
+                      style="display: inline;">
+
+                    <button type="submit"
+                            class="feature-button remove-button">
+
+                        🗑️ Remove PDF
+
+                    </button>
+
+                </form>
+
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- =========================================
+             FEATURE CARDS
+        ========================================== -->
+
+        {% if current_pdf %}
+
+        <div class="feature-grid">
+
+
+            <!-- =====================================
+                 AI TUTOR
+            ====================================== -->
+
+            <div class="feature-card tutor-card">
+
+                <div class="feature-icon">
+                    🤖
+                </div>
+
+                <h2>AI Tutor</h2>
+
+                <p>
+                    Ask questions and learn with AI using your uploaded
+                    study material.
+                </p>
+
+                <a href="/ask"
+                   class="feature-button card-button">
+
+                    Ask a Question
+
+                </a>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 AI SUMMARY
+            ====================================== -->
+
+            <div class="feature-card summary-card">
+
+                <div class="feature-icon">
+                    ✨
+                </div>
+
+                <h2>AI Summary</h2>
+
+                <p>
+                    Get a simple, exam-friendly summary from your
+                    uploaded PDF.
+                </p>
+
+                <a href="/summary"
+                   class="feature-button card-button">
+
+                    Generate Summary
+
+                </a>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 GENERATE QUIZ
+            ====================================== -->
+
+            <div class="feature-card quiz-card">
+
+                <div class="feature-icon">
+                    📝
+                </div>
+
+                <h2>Generate Quiz</h2>
+
+                <p>
+                    Practice your study material with AI-generated
+                    questions.
+                </p>
+
+                <a href="/quiz"
+                   class="feature-button card-button">
+
+                    Generate Quiz
+
+                </a>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 MY PROGRESS
+            ====================================== -->
+
+            <div class="feature-card progress-card">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <h2>My Progress</h2>
+
+                <p>
+                    Track your learning progress and quiz performance.
+                </p>
+
+                <a href="/progress"
+                   class="feature-button card-button">
+
+                    View Progress
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+        {% endif %}
+
+
+
+        <!-- =========================================
+             START MESSAGE
+        ========================================== -->
+
+        {% if not current_pdf %}
+
+        <div class="upload-message">
+
+            <h2>📖 Start Your Study Journey</h2>
+
+            <p>
+                Upload your study PDF above to unlock
+                AI Summary, AI Tutor, Quiz and Progress.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+        /* -----------------------------------------
+           NORMAL PDF UPLOAD
+        ----------------------------------------- */
+
+        const pdfFile =
+            document.getElementById("pdf-file");
+
+        const fileName =
+            document.getElementById("file-name");
+
+
+        if (pdfFile && fileName) {
+
+            pdfFile.addEventListener("change", function () {
+
+                if (this.files.length > 0) {
+
+                    fileName.textContent =
+                        this.files[0].name;
+
+                } else {
+
+                    fileName.textContent =
+                        "No file selected";
+
+                }
+
+            });
+
+        }
+
+
+
+        /* -----------------------------------------
+           REPLACE PDF
+           Selecting a file automatically uploads it
+        ----------------------------------------- */
+
+        const replaceFile =
+            document.getElementById("replace-file");
+
+        const replaceForm =
+            document.getElementById("replace-form");
+
+
+        if (replaceFile && replaceForm) {
+
+            replaceFile.addEventListener(
+                "change",
+                function () {
+
+                    if (this.files.length > 0) {
+
+                        replaceForm.submit();
+
+                    }
+
+                }
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

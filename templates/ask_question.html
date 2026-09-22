@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Tutor - StudyMate AI</title>
+
+    <!-- Markdown renderer -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fa;
+            color: #111827;
+        }
+
+        .tutor-page {
+            width: 92%;
+            max-width: 1150px;
+            margin: 35px auto;
+        }
+
+
+        /* =========================
+           PAGE HEADER
+        ========================== */
+
+        .tutor-header {
+            text-align: center;
+            padding: 5px 20px 25px;
+        }
+
+        .tutor-title {
+            margin: 0;
+            color: #123c66;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .tutor-title .ai-icon {
+            margin-right: 8px;
+        }
+
+        .tutor-title::after {
+            content: "";
+            display: block;
+            width: 180px;
+            height: 3px;
+            background: #123c66;
+            margin: 12px auto 0;
+            border-radius: 3px;
+        }
+
+        .tutor-description {
+            margin: 15px auto 0;
+            max-width: 800px;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .pdf-name {
+            max-width: 750px;
+            margin: 18px auto 0;
+            padding: 11px 16px;
+            background: #eef4f9;
+            border-left: 4px solid #123c66;
+            border-radius: 8px;
+            color: #234f78;
+            font-size: 14px;
+            text-align: left;
+        }
+
+
+        /* =========================
+           QUESTION CARD
+        ========================== */
+
+        .question-card {
+            background: white;
+            border: 2px solid #123c66;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+            margin-bottom: 25px;
+        }
+
+        .question-card h2 {
+            margin: 0 0 10px;
+            color: #123c66;
+            font-size: 22px;
+        }
+
+        .question-instruction {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .question-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 125px;
+            resize: vertical;
+            padding: 14px;
+            border: 1px solid #b8c4d0;
+            border-radius: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #123c66;
+            box-shadow: 0 0 0 2px rgba(18, 60, 102, 0.12);
+        }
+
+        .ask-button {
+            margin-top: 15px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            background: #123c66;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .ask-button:hover {
+            background: #0d3154;
+        }
+
+
+        /* =========================
+           ERROR MESSAGE
+        ========================== */
+
+        .error-message {
+            background: #fff4f4;
+            border: 1px solid #e0a0a0;
+            border-left: 4px solid #b42318;
+            color: #8a1c13;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================
+           CHAT HISTORY
+        ========================== */
+
+        .history-title {
+            color: #123c66;
+            font-size: 24px;
+            margin: 5px 0 18px;
+            font-weight: 700;
+        }
+
+        .chat-item {
+            background: white;
+            border: 2px solid #123c66;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 22px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+        }
+
+        .question-box {
+            background: #eef4f9;
+            border-left: 5px solid #123c66;
+            padding: 14px 17px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+        }
+
+        .question-heading {
+            color: #123c66;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .question-text {
+            color: #222;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .answer-box {
+            padding: 5px 2px;
+        }
+
+        .answer-heading {
+            color: #123c66;
+            font-size: 19px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .answer-content {
+            color: #222;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           MARKDOWN FORMATTING
+        ========================== */
+
+        .answer-content h1 {
+            color: #123c66;
+            font-size: 26px;
+            margin: 20px 0 10px;
+            border-bottom: 2px solid #d7e0e8;
+            padding-bottom: 7px;
+        }
+
+        .answer-content h2 {
+            color: #123c66;
+            font-size: 22px;
+            margin: 20px 0 10px;
+        }
+
+        .answer-content h3 {
+            color: #234f78;
+            font-size: 19px;
+            margin: 18px 0 8px;
+        }
+
+        .answer-content p {
+            margin: 10px 0;
+        }
+
+        .answer-content strong {
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .answer-content ul,
+        .answer-content ol {
+            margin: 10px 0 15px 25px;
+            padding-left: 15px;
+        }
+
+        .answer-content li {
+            margin-bottom: 7px;
+        }
+
+        .answer-content blockquote {
+            margin: 15px 0;
+            padding: 10px 15px;
+            background: #f3f6f9;
+            border-left: 4px solid #123c66;
+            color: #444;
+        }
+
+        .answer-content code {
+            background: #f1f4f7;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+        }
+
+        .answer-content pre {
+            background: #f3f6f9;
+            border-left: 4px solid #123c66;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        .answer-content pre code {
+            background: transparent;
+            padding: 0;
+        }
+
+
+        /* =========================
+           BOTTOM BUTTONS
+        ========================== */
+
+        .bottom-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-top: 28px;
+            margin-bottom: 10px;
+        }
+
+        .bottom-button {
+            display: inline-block;
+            text-decoration: none;
+            padding: 11px 22px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            min-width: 190px;
+        }
+
+        .dashboard-button {
+            background: #e9ecef;
+            color: #333;
+            border: 1px solid #c8cdd2;
+        }
+
+        .dashboard-button:hover {
+            background: #dde1e5;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 700px) {
+
+            .tutor-page {
+                width: 94%;
+                margin: 25px auto;
+            }
+
+            .tutor-title {
+                font-size: 28px;
+            }
+
+            .question-card,
+            .chat-item {
+                padding: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="tutor-page">
+
+
+    <!-- =========================
+         PAGE HEADER
+    ========================== -->
+
+    <div class="tutor-header">
+
+        <h1 class="tutor-title">
+            <span class="ai-icon">🤖</span>
+            AI Tutor
+        </h1>
+
+        <p class="tutor-description">
+            Ask questions about your uploaded study material
+            and StudyMate AI will explain the topic in simple,
+            student-friendly language.
+        </p>
+
+        {% if current_pdf %}
+
+        <div class="pdf-name">
+            <strong>Study Material:</strong>
+            {{ current_pdf }}
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- =========================
+         ERROR
+    ========================== -->
+
+    {% if error %}
+
+    <div class="error-message">
+        {{ error }}
+    </div>
+
+    {% endif %}
+
+
+    <!-- =========================
+         ASK QUESTION
+         This stays available for
+         every new question.
+    ========================== -->
+
+    <div class="question-card" id="question-form">
+
+        <h2>Ask Your Question</h2>
+
+        <p class="question-instruction">
+            Ask anything related to your uploaded study material.
+            The AI Tutor will answer using the material provided in your PDF.
+        </p>
+
+        <form action="{{ url_for('ask') }}" method="POST">
+
+            <label for="question" class="question-label">
+                Your Question
+            </label>
+
+            <textarea
+                id="question"
+                name="question"
+                placeholder="Ask a question about your study material..."
+                required></textarea>
+
+            <button type="submit" class="ask-button">
+                Ask AI Tutor
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- =========================
+         CHAT HISTORY
+    ========================== -->
+
+    {% if history %}
+
+    <h2 class="history-title">
+        AI Tutor Conversation
+    </h2>
+
+
+    {% for item in history %}
+
+    <div class="chat-item">
+
+        <div class="question-box">
+
+            <div class="question-heading">
+                Your Question
+            </div>
+
+            <div class="question-text">
+                {{ item.question }}
+            </div>
+
+        </div>
+
+
+        <div class="answer-box">
+
+            <div class="answer-heading">
+                🤖 AI Tutor Answer
+            </div>
+
+            <div class="answer-content markdown-answer"
+                 data-answer="{{ item.answer | e }}">
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+    {% endif %}
+
+
+    <!-- =========================
+         BOTTOM NAVIGATION
+    ========================== -->
+
+    <div class="bottom-buttons">
+
+        {% if history %}
+
+        <a href="#question-form"
+           class="bottom-button dashboard-button">
+            Ask Another Question
+        </a>
+
+        {% endif %}
+
+        <a href="{{ url_for('dashboard') }}"
+           class="bottom-button dashboard-button">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================
+     RENDER MARKDOWN
+========================== -->
+
+<script>
+
+    const answerElements =
+        document.querySelectorAll(".markdown-answer");
+
+    answerElements.forEach(function(element) {
+
+        const markdownText =
+            element.getAttribute("data-answer") || "";
+
+        element.innerHTML =
+            marked.parse(markdownText);
+
+    });
+
+</script>
+
+</body>
+
+</html>

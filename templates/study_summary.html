@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Summary - StudyMate AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Markdown Renderer -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- PDF Generator -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+</head>
+
+
+<body class="summary-body">
+
+
+<div class="summary-page">
+
+
+    <!-- =========================================
+         DOWNLOAD PDF BUTTON
+    ========================================== -->
+
+    <div class="summary-topbar">
+
+        <button
+            type="button"
+            id="download-pdf-button"
+            class="download-pdf-button">
+
+            Download PDF
+
+        </button>
+
+    </div>
+
+
+    <!-- =========================================
+         SUMMARY HEADER
+    ========================================== -->
+
+    <div class="summary-header">
+
+        <div class="summary-icon">
+            ✨
+        </div>
+
+        <h1>
+            AI Generated Summary
+        </h1>
+
+        <p>
+            Summary of {{ filename }}
+        </p>
+
+    </div>
+
+
+    <!-- =========================================
+         SUMMARY CONTENT
+    ========================================== -->
+
+    {% if summary %}
+
+    <div class="summary-card"
+         id="summary-document">
+
+        <div class="summary-card-header">
+
+            <div>
+
+                <h2>
+                    AI Summary
+                </h2>
+
+                <p>
+                    Here is a simple and exam-friendly
+                    summary generated from your study material.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div id="summary-content"
+             class="formatted-summary">
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- =========================================
+         IMPORTANT QUESTIONS
+    ========================================== -->
+
+    {% if questions %}
+
+    <div class="summary-card questions-card">
+
+        <div class="summary-card-header">
+
+            <div>
+
+                <h2>
+                    📚 Important Questions
+                </h2>
+
+                <p>
+                    Exam preparation questions generated
+                    from your uploaded study material.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div id="questions-content"
+             class="formatted-summary">
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- =========================================
+         BOTTOM ACTIONS
+    ========================================== -->
+
+    <div class="summary-actions">
+
+        {% if summary and not questions %}
+
+        <a href="{{ url_for('questions') }}"
+           class="summary-button questions-button">
+
+            📚 Generate Important Questions
+
+        </a>
+
+        {% endif %}
+
+
+        <a href="{{ url_for('dashboard') }}"
+           class="summary-button back-button">
+
+            ← Back to Dashboard
+
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================
+     HIDDEN SUMMARY DATA
+========================================== -->
+
+{% if summary %}
+
+<div id="summary-data"
+     data-content="{{ summary | e }}"
+     style="display: none;">
+
+</div>
+
+{% endif %}
+
+
+{% if questions %}
+
+<div id="questions-data"
+     data-content="{{ questions | e }}"
+     style="display: none;">
+
+</div>
+
+{% endif %}
+
+
+
+<script>
+
+    /* =========================================
+       RENDER AI SUMMARY
+    ========================================== */
+
+    const summaryData =
+        document.getElementById("summary-data");
+
+
+    if (summaryData) {
+
+        const summaryText =
+            summaryData.dataset.content;
+
+
+        document.getElementById("summary-content")
+            .innerHTML =
+            marked.parse(summaryText);
+
+    }
+
+
+
+    /* =========================================
+       RENDER IMPORTANT QUESTIONS
+    ========================================== */
+
+    const questionsData =
+        document.getElementById("questions-data");
+
+
+    if (questionsData) {
+
+        const questionsText =
+            questionsData.dataset.content;
+
+
+        document.getElementById("questions-content")
+            .innerHTML =
+            marked.parse(questionsText);
+
+    }
+
+
+
+    /* =========================================
+       DOWNLOAD SUMMARY AS PDF
+    ========================================== */
+
+    const downloadButton =
+        document.getElementById("download-pdf-button");
+
+
+    if (downloadButton) {
+
+        downloadButton.addEventListener(
+            "click",
+            function () {
+
+                const summaryDocument =
+                    document.getElementById("summary-document");
+
+
+                if (!summaryDocument) {
+
+                    alert(
+                        "There is no summary available to download."
+                    );
+
+                    return;
+
+                }
+
+
+                const filename =
+                    "{{ filename | e }}";
+
+
+                const cleanFilename =
+                    filename
+                        .replace(/\.pdf$/i, "")
+                        .replace(
+                            /[^a-zA-Z0-9-_ ]/g,
+                            ""
+                        )
+                        .trim();
+
+
+                const pdfFilename =
+                    cleanFilename
+                        ? "StudyMate_AI_" +
+                          cleanFilename +
+                          "_Summary.pdf"
+                        : "StudyMate_AI_Summary.pdf";
+
+
+                const options = {
+
+                    margin: [
+                        10,
+                        10,
+                        10,
+                        10
+                    ],
+
+                    filename: pdfFilename,
+
+                    image: {
+                        type: "jpeg",
+                        quality: 0.98
+                    },
+
+                    html2canvas: {
+
+                        scale: 2,
+
+                        useCORS: true,
+
+                        backgroundColor: "#ffffff",
+
+                        logging: false
+
+                    },
+
+                    jsPDF: {
+
+                        unit: "mm",
+
+                        format: "a4",
+
+                        orientation: "portrait"
+
+                    },
+
+                    pagebreak: {
+
+                        mode: [
+                            "avoid-all",
+                            "css",
+                            "legacy"
+                        ]
+
+                    }
+
+                };
+
+
+                const originalText =
+                    downloadButton.innerText;
+
+
+                downloadButton.innerText =
+                    "Preparing PDF...";
+
+
+                downloadButton.disabled = true;
+
+
+                html2pdf()
+
+                    .set(options)
+
+                    .from(summaryDocument)
+
+                    .save()
+
+                    .then(function () {
+
+                        downloadButton.innerText =
+                            originalText;
+
+                        downloadButton.disabled =
+                            false;
+
+                    })
+
+                    .catch(function (error) {
+
+                        console.error(
+                            "PDF generation error:",
+                            error
+                        );
+
+
+                        alert(
+                            "The PDF could not be generated. Please try again."
+                        );
+
+
+                        downloadButton.innerText =
+                            originalText;
+
+                        downloadButton.disabled =
+                            false;
+
+                    });
+
+            }
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

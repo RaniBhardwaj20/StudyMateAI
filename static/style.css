@@ -1,0 +1,1511 @@
+/* =========================================
+   STUDYMATE AI - MAIN STYLESHEET
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+/* =========================================
+   DASHBOARD PAGE
+========================================= */
+
+.dashboard-page {
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #071b49,
+            #06366d,
+            #087bb5
+        );
+
+    color: white;
+
+    padding: 35px 25px;
+}
+
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.dashboard-container {
+
+    width: 96%;
+
+    max-width: 1600px;
+
+    margin: 0 auto;
+}
+
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.dashboard-header {
+
+    text-align: center;
+
+    margin-bottom: 28px;
+}
+
+
+.dashboard-header h1 {
+
+    font-size: 36px;
+
+    font-weight: 700;
+
+    margin-bottom: 6px;
+}
+
+
+.dashboard-header p {
+
+    font-size: 18px;
+
+    color: #ffffff;
+}
+
+
+
+/* =========================================
+   UPLOAD CARD
+========================================= */
+
+.upload-card {
+
+    width: 100%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087bb5,
+            #0870a5
+        );
+
+    border: 1px solid #19d7ff;
+
+    border-radius: 25px;
+
+    padding: 30px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+
+/* =========================================
+   UPLOAD HEADING
+========================================= */
+
+.upload-heading h2 {
+
+    font-size: 28px;
+
+    margin-bottom: 4px;
+}
+
+
+.upload-heading p {
+
+    font-size: 16px;
+
+    margin-bottom: 18px;
+}
+
+
+
+/* =========================================
+   UPLOAD FORM
+========================================= */
+
+.upload-form {
+
+    width: 100%;
+
+    min-height: 90px;
+
+    border: 1px dashed rgba(255, 255, 255, 0.65);
+
+    border-radius: 18px;
+
+    padding: 14px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+
+
+/* =========================================
+   NORMAL UPLOAD FORM
+========================================= */
+
+#file-name {
+
+    font-size: 15px;
+
+    color: white;
+
+    flex: 1;
+
+    min-width: 150px;
+}
+
+
+
+/* =========================================
+   CURRENT UPLOAD ROW
+========================================= */
+
+.current-upload {
+
+    justify-content: flex-start;
+
+    min-height: 76px;
+
+    padding: 12px 20px;
+}
+
+
+
+/* =========================================
+   CURRENT PDF
+========================================= */
+
+.current-pdf {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 12px 16px;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    white-space: nowrap;
+}
+
+
+.current-pdf strong {
+
+    margin-left: 2px;
+}
+
+
+.pdf-icon {
+
+    font-size: 17px;
+}
+
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.feature-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #ffffff;
+
+    color: #08315f;
+
+    border: none;
+
+    border-radius: 14px;
+
+    padding: 13px 22px;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    white-space: nowrap;
+}
+
+
+.feature-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* =========================================
+   SELECT PDF BUTTON
+========================================= */
+
+.select-button {
+
+    background: #ffb000;
+
+    color: #082b56;
+}
+
+
+
+/* =========================================
+   UPLOAD PDF BUTTON
+========================================= */
+
+.upload-button {
+
+    background: #ffffff;
+
+    color: #08315f;
+}
+
+
+
+/* =========================================
+   REPLACE PDF BUTTON
+========================================= */
+
+.replace-button {
+
+    background: #ffb000;
+
+    color: #082b56;
+}
+
+
+
+/* =========================================
+   REMOVE PDF BUTTON
+========================================= */
+
+.remove-button {
+
+    background: #ffffff;
+
+    color: #08315f;
+}
+
+
+
+/* =========================================
+   FEATURE GRID
+========================================= */
+
+.feature-grid {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-top: 25px;
+}
+
+
+
+/* =========================================
+   FEATURE CARDS - BASE
+========================================= */
+
+.feature-card {
+
+    min-height: 220px;
+
+    border-radius: 22px;
+
+    padding: 25px;
+
+    border: 1px solid #20d5ff;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    justify-content: flex-start;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.22);
+
+    transition: 0.2s ease;
+}
+
+
+.feature-card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 14px 30px rgba(0, 0, 0, 0.30);
+}
+
+
+
+/* =========================================
+   AI TUTOR - BLUE
+========================================= */
+
+.tutor-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            #0757b8,
+            #0876d1
+        );
+
+    border-color: #18d9ff;
+}
+
+
+
+/* =========================================
+   AI SUMMARY - TEAL
+========================================= */
+
+.summary-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            #07929c,
+            #19a9b7
+        );
+
+    border-color: #18e4e9;
+}
+
+
+
+/* =========================================
+   GENERATE QUIZ - ORANGE
+========================================= */
+
+.quiz-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            #ed7208,
+            #ff9b22
+        );
+
+    border-color: #ffbd22;
+}
+
+
+
+/* =========================================
+   MY PROGRESS - PURPLE
+========================================= */
+
+.progress-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            #7138d1,
+            #7c4be5
+        );
+
+    border-color: #c06cff;
+}
+
+
+
+/* =========================================
+   FEATURE ICON
+========================================= */
+
+.feature-icon {
+
+    font-size: 40px;
+
+    margin-bottom: 14px;
+}
+
+
+
+/* =========================================
+   FEATURE TITLE
+========================================= */
+
+.feature-card h2 {
+
+    font-size: 27px;
+
+    margin-bottom: 10px;
+}
+
+
+
+/* =========================================
+   FEATURE DESCRIPTION
+========================================= */
+
+.feature-card p {
+
+    font-size: 16px;
+
+    line-height: 1.55;
+
+    margin-bottom: 20px;
+
+    color: #ffffff;
+
+    max-width: 650px;
+}
+
+
+
+/* =========================================
+   FEATURE BUTTON
+========================================= */
+
+.card-button {
+
+    margin-top: auto;
+
+    background: #ffffff;
+
+    color: #08315f;
+
+    padding: 11px 20px;
+
+    border-radius: 13px;
+
+    font-size: 16px;
+}
+
+
+
+/* =========================================
+   START MESSAGE
+========================================= */
+
+.upload-message {
+
+    margin-top: 25px;
+
+    width: 100%;
+
+    padding: 25px 30px;
+
+    background:
+        rgba(255, 255, 255, 0.10);
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    border-radius: 20px;
+
+    text-align: center;
+}
+
+
+.upload-message h2 {
+
+    font-size: 25px;
+
+    margin-bottom: 8px;
+}
+
+
+.upload-message p {
+
+    font-size: 16px;
+
+    line-height: 1.5;
+}
+
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 800px) {
+
+    .dashboard-container {
+
+        width: 95%;
+    }
+
+
+    .feature-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .dashboard-header h1 {
+
+        font-size: 30px;
+    }
+
+
+    .upload-form {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    #file-name {
+
+        text-align: center;
+    }
+
+
+    .feature-button {
+
+        width: 100%;
+    }
+
+
+    .current-upload {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .current-pdf {
+
+        justify-content: center;
+
+        white-space: normal;
+
+        flex-wrap: wrap;
+    }
+
+}
+
+
+
+@media (max-width: 500px) {
+
+    .dashboard-page {
+
+        padding: 20px 10px;
+    }
+
+
+    .dashboard-container {
+
+        width: 100%;
+    }
+
+
+    .dashboard-header h1 {
+
+        font-size: 26px;
+    }
+
+
+    .dashboard-header p {
+
+        font-size: 15px;
+    }
+
+
+    .upload-card {
+
+        padding: 20px;
+    }
+
+
+    .feature-card {
+
+        padding: 22px;
+
+        min-height: 260px;
+    }
+
+
+    .feature-card h2 {
+
+        font-size: 23px;
+    }
+
+}
+
+
+/* =================================================
+   AI SUMMARY PAGE
+   IMPORTANT:
+   SUMMARY PAGE STYLES ARE KEPT INSIDE .summary-body
+   SO THEY CANNOT CHANGE DASHBOARD CARDS.
+================================================= */
+
+
+/* =========================================
+   SUMMARY BODY
+========================================= */
+
+.summary-body {
+
+    margin: 0;
+
+    padding: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f5f7fa;
+
+    color: #111111;
+}
+
+
+/* =========================================
+   SUMMARY PAGE CONTAINER
+========================================= */
+
+.summary-body .summary-page {
+
+    width: 92%;
+
+    max-width: 1150px;
+
+    margin: 0 auto;
+
+    padding: 25px 0 50px;
+}
+
+
+/* =========================================
+   SUMMARY TOP BAR
+========================================= */
+
+.summary-body .summary-topbar {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================
+   DOWNLOAD PDF BUTTON
+========================================= */
+
+.summary-body .download-pdf-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 11px 20px;
+
+    background: #123c66;
+
+    color: #ffffff;
+
+    border: 1px solid #0d3154;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 4px 10px rgba(18, 60, 102, 0.18);
+
+    transition: 0.2s ease;
+
+    white-space: nowrap;
+}
+
+
+.summary-body .download-pdf-button:hover {
+
+    background: #0d3154;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 16px rgba(18, 60, 102, 0.25);
+}
+
+
+/* =========================================
+   SUMMARY HEADER
+========================================= */
+
+.summary-body .summary-header {
+
+    text-align: center;
+
+    color: #111827;
+
+    margin-bottom: 28px;
+}
+
+
+.summary-body .summary-icon {
+
+    font-size: 40px;
+
+    margin-bottom: 5px;
+}
+
+
+.summary-body .summary-header h1 {
+
+    font-size: 36px;
+
+    margin: 0 0 8px;
+
+    font-weight: 700;
+
+    color: #111827;
+}
+
+
+.summary-body .summary-header p {
+
+    font-size: 16px;
+
+    margin: 0;
+
+    color: #4b5563;
+}
+
+
+/* =========================================
+   SUMMARY CARD
+   ONLY APPLIES INSIDE SUMMARY PAGE
+========================================= */
+
+.summary-body .summary-card {
+
+    background: #ffffff;
+
+    border: 2px solid #123c66;
+
+    border-radius: 16px;
+
+    padding: 30px;
+
+    margin-bottom: 28px;
+
+    box-shadow:
+        0 6px 20px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================
+   SUMMARY DOCUMENT
+========================================= */
+
+.summary-body .summary-document {
+
+    background: #ffffff;
+
+    border: 2px solid #123c66;
+
+    border-radius: 16px;
+
+    padding: 30px;
+
+    margin-bottom: 28px;
+
+    box-shadow:
+        0 6px 20px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================
+   SUMMARY CARD HEADER
+========================================= */
+
+.summary-body .summary-card-header {
+
+    padding-bottom: 18px;
+
+    margin-bottom: 25px;
+
+    border-bottom: 1px solid #d8dee6;
+}
+
+
+.summary-body .summary-card-header h2 {
+
+    margin: 0 0 8px;
+
+    font-size: 25px;
+
+    color: #111827;
+
+    font-weight: 700;
+}
+
+
+.summary-body .summary-card-header p {
+
+    margin: 0;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+
+    color: #4b5563;
+}
+
+
+/* =========================================
+   SUMMARY DOCUMENT HEADER
+========================================= */
+
+.summary-body .summary-document-header {
+
+    padding-bottom: 18px;
+
+    margin-bottom: 25px;
+
+    border-bottom: 1px solid #d8dee6;
+}
+
+
+.summary-body .summary-document-header h2 {
+
+    margin: 0 0 8px;
+
+    font-size: 25px;
+
+    color: #111827;
+
+    font-weight: 700;
+}
+
+
+.summary-body .summary-document-header p {
+
+    margin: 0;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+
+    color: #4b5563;
+}
+
+
+/* =========================================
+   FORMATTED AI CONTENT
+========================================= */
+
+.summary-body .formatted-summary {
+
+    color: #111111;
+
+    font-size: 15px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================
+   MAIN HEADING
+========================================= */
+
+.summary-body .formatted-summary h1 {
+
+    font-size: 28px;
+
+    color: #111111;
+
+    font-weight: 700;
+
+    margin-top: 5px;
+
+    margin-bottom: 18px;
+
+    padding-bottom: 10px;
+
+    border-bottom: 2px solid #123c66;
+}
+
+
+/* =========================================
+   SECTION HEADINGS
+========================================= */
+
+.summary-body .formatted-summary h2 {
+
+    font-size: 22px;
+
+    color: #111111;
+
+    font-weight: 700;
+
+    margin-top: 28px;
+
+    margin-bottom: 10px;
+
+    padding-bottom: 6px;
+
+    border-bottom: 1px solid #cfd7e2;
+}
+
+
+/* =========================================
+   SUBSECTION HEADINGS
+========================================= */
+
+.summary-body .formatted-summary h3 {
+
+    font-size: 19px;
+
+    color: #111111;
+
+    font-weight: 700;
+
+    margin-top: 21px;
+
+    margin-bottom: 7px;
+}
+
+
+.summary-body .formatted-summary h4 {
+
+    font-size: 17px;
+
+    color: #111111;
+
+    font-weight: 700;
+
+    margin-top: 17px;
+
+    margin-bottom: 6px;
+}
+
+
+/* =========================================
+   PARAGRAPHS
+========================================= */
+
+.summary-body .formatted-summary p {
+
+    margin: 7px 0 13px;
+
+    color: #111111;
+
+    font-weight: 400;
+
+    font-size: 15px;
+}
+
+
+/* =========================================
+   BOLD TEXT
+========================================= */
+
+.summary-body .formatted-summary strong {
+
+    color: #111111;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   LISTS
+========================================= */
+
+.summary-body .formatted-summary ul,
+.summary-body .formatted-summary ol {
+
+    margin: 9px 0 17px;
+
+    padding-left: 28px;
+}
+
+
+.summary-body .formatted-summary li {
+
+    margin-bottom: 6px;
+
+    padding-left: 3px;
+
+    color: #111111;
+
+    font-size: 15px;
+
+    font-weight: 400;
+}
+
+
+/* =========================================
+   TABLES
+========================================= */
+
+.summary-body .formatted-summary table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin: 20px 0 25px;
+
+    font-size: 14px;
+
+    background: #ffffff;
+
+    border: 1px solid #b9c5d2;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   TABLE HEADER
+========================================= */
+
+.summary-body .formatted-summary th {
+
+    background: #234f78;
+
+    color: #ffffff;
+
+    font-weight: 700;
+
+    text-align: left;
+
+    padding: 11px 12px;
+
+    border: 1px solid #b9c5d2;
+}
+
+
+/* =========================================
+   TABLE BODY
+========================================= */
+
+.summary-body .formatted-summary td {
+
+    padding: 10px 12px;
+
+    border: 1px solid #cbd5df;
+
+    color: #111111;
+
+    vertical-align: top;
+
+    font-weight: 400;
+}
+
+
+/* =========================================
+   ALTERNATE TABLE ROWS
+========================================= */
+
+.summary-body .formatted-summary tr:nth-child(even) {
+
+    background: #f3f6f9;
+}
+
+
+/* =========================================
+   TABLE HOVER
+========================================= */
+
+.summary-body .formatted-summary tr:hover {
+
+    background: #eaf0f5;
+}
+
+
+/* =========================================
+   TREE / DIAGRAM / CODE BLOCK
+========================================= */
+
+.summary-body .formatted-summary pre {
+
+    background: #f3f6f9;
+
+    border: 1px solid #c4cfdb;
+
+    border-left: 4px solid #234f78;
+
+    border-radius: 9px;
+
+    padding: 17px;
+
+    margin: 18px 0 22px;
+
+    overflow-x: auto;
+
+    white-space: pre-wrap;
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+    color: #172b3f;
+}
+
+
+/* =========================================
+   INLINE CODE
+========================================= */
+
+.summary-body .formatted-summary code {
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    background: #edf2f6;
+
+    padding: 2px 5px;
+
+    border-radius: 4px;
+
+    color: #1f4568;
+}
+
+
+/* =========================================
+   CODE INSIDE TREE / DIAGRAM
+========================================= */
+
+.summary-body .formatted-summary pre code {
+
+    background: transparent;
+
+    padding: 0;
+
+    color: #172b3f;
+}
+
+
+/* =========================================
+   HORIZONTAL LINE
+========================================= */
+
+.summary-body .formatted-summary hr {
+
+    border: none;
+
+    border-top: 1px solid #d3dae2;
+
+    margin: 24px 0;
+}
+
+
+/* =========================================
+   LINKS
+========================================= */
+
+.summary-body .formatted-summary a {
+
+    color: #234f78;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+
+.summary-body .formatted-summary a:hover {
+
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   BOTTOM ACTION BUTTONS
+========================================= */
+
+.summary-body .summary-actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    margin-top: 25px;
+}
+
+
+.summary-body .summary-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 12px 21px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+
+.summary-body .summary-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 14px rgba(0, 0, 0, 0.16);
+}
+
+
+/* =========================================
+   IMPORTANT QUESTIONS BUTTON
+========================================= */
+
+.summary-body .questions-button {
+
+    background: #c87516;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+.summary-body .back-button {
+
+    background: #e9edf2;
+
+    color: #17324d;
+
+    border: 1px solid #c7d0da;
+}
+
+
+/* =========================================
+   QUESTIONS DOCUMENT
+========================================= */
+
+.summary-body .questions-document {
+
+    margin-top: 28px;
+}
+
+
+/* =========================================
+   SUMMARY MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .summary-body .summary-page {
+
+        width: 94%;
+
+        padding-top: 20px;
+    }
+
+
+    .summary-body .summary-header h1 {
+
+        font-size: 30px;
+    }
+
+
+    .summary-body .summary-card,
+    .summary-body .summary-document {
+
+        padding: 22px;
+    }
+
+
+    .summary-body .summary-card-header h2,
+    .summary-body .summary-document-header h2 {
+
+        font-size: 23px;
+    }
+
+
+    .summary-body .formatted-summary h1 {
+
+        font-size: 25px;
+    }
+
+
+    .summary-body .formatted-summary h2 {
+
+        font-size: 21px;
+    }
+
+
+    .summary-body .formatted-summary h3 {
+
+        font-size: 18px;
+    }
+
+
+    .summary-body .formatted-summary table {
+
+        font-size: 14px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 500px) {
+
+    .summary-body .summary-page {
+
+        width: 95%;
+    }
+
+
+    .summary-body .summary-topbar {
+
+        margin-bottom: 12px;
+    }
+
+
+    .summary-body .download-pdf-button {
+
+        padding: 10px 17px;
+
+        font-size: 14px;
+    }
+
+
+    .summary-body .summary-header h1 {
+
+        font-size: 26px;
+    }
+
+
+    .summary-body .summary-header p {
+
+        font-size: 14px;
+    }
+
+
+    .summary-body .summary-card,
+    .summary-body .summary-document {
+
+        padding: 17px;
+
+        border-radius: 13px;
+    }
+
+
+    .summary-body .formatted-summary {
+
+        font-size: 14px;
+    }
+
+
+    .summary-body .formatted-summary p {
+
+        font-size: 14px;
+    }
+
+
+    .summary-body .formatted-summary li {
+
+        font-size: 14px;
+    }
+
+
+    .summary-body .formatted-summary pre {
+
+        font-size: 12px;
+
+        padding: 12px;
+    }
+
+
+    .summary-body .summary-button {
+
+        width: 100%;
+    }
+
+}

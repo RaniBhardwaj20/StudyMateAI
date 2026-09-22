@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Study Results | StudyMate AI</title>
+
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+
+    <!-- Marked.js -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
+    </script>
+
+
+    <!-- MathJax -->
+
+    <script>
+
+        window.MathJax = {
+
+            tex: {
+
+                inlineMath: [
+                    ['$', '$'],
+                    ['\\(', '\\)']
+                ],
+
+                displayMath: [
+                    ['$$', '$$'],
+                    ['\\[', '\\]']
+                ]
+
+            },
+
+            options: {
+
+                skipHtmlTags: [
+                    'script',
+                    'noscript',
+                    'style',
+                    'textarea',
+                    'pre',
+                    'code'
+                ]
+
+            }
+
+        };
+
+    </script>
+
+
+    <script async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+
+    <style>
+
+
+        .results-page {
+
+            width: 92%;
+
+            max-width: 1100px;
+
+            margin: 40px auto;
+
+            padding-bottom: 60px;
+
+        }
+
+
+        .results-header {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .results-header h1 {
+
+            margin: 0;
+
+            font-size: 36px;
+
+        }
+
+
+        .results-header p {
+
+            color: #aebbd0;
+
+            font-size: 16px;
+
+        }
+
+
+        .result-card {
+
+            background:
+                rgba(18, 30, 49, 0.92);
+
+            border:
+                1px solid
+                rgba(120, 160, 200, 0.2);
+
+            border-radius: 20px;
+
+            padding: 30px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,0,0,0.3);
+
+        }
+
+
+        .result-heading {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding-bottom: 16px;
+
+            margin-bottom: 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.1);
+
+        }
+
+
+        .result-heading h2 {
+
+            margin: 0;
+
+            font-size: 24px;
+
+        }
+
+
+        .result-label {
+
+            padding:
+                6px
+                12px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(80,150,255,0.15);
+
+            color: #86cfff;
+
+            font-size: 13px;
+
+        }
+
+
+        .ai-content {
+
+            color: #dce6f1;
+
+            font-size: 16px;
+
+            line-height: 1.75;
+
+        }
+
+
+        .ai-content h1,
+        .ai-content h2,
+        .ai-content h3 {
+
+            color: white;
+
+            margin-top: 26px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .ai-content h1 {
+
+            font-size: 27px;
+
+        }
+
+
+        .ai-content h2 {
+
+            font-size: 23px;
+
+        }
+
+
+        .ai-content h3 {
+
+            font-size: 19px;
+
+        }
+
+
+        .ai-content li {
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .ai-content table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin:
+                20px 0;
+
+            overflow: hidden;
+
+            border-radius: 10px;
+
+        }
+
+
+        .ai-content th,
+        .ai-content td {
+
+            padding:
+                11px
+                13px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            text-align: left;
+
+        }
+
+
+        .ai-content th {
+
+            background:
+                rgba(70,120,190,0.25);
+
+        }
+
+
+        .question-action {
+
+            text-align: center;
+
+            margin:
+                25px
+                0;
+
+        }
+
+
+        .question-button {
+
+            padding:
+                13px
+                28px;
+
+            border: none;
+
+            border-radius: 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #59d69b,
+                    #38b97d
+                );
+
+            color: #062d1c;
+
+            font-weight: bold;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s;
+
+        }
+
+
+        .question-button:hover {
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        .back-result {
+
+            display: inline-block;
+
+            padding:
+                12px
+                24px;
+
+            border-radius: 25px;
+
+            text-decoration: none;
+
+            background:
+                #4676c8;
+
+            color: white;
+
+            font-weight: bold;
+
+        }
+
+
+        .result-actions {
+
+            text-align: center;
+
+            margin-top: 30px;
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .results-page {
+
+                width: 94%;
+
+            }
+
+
+            .result-card {
+
+                padding: 20px;
+
+            }
+
+
+            .result-heading {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="results-page">
+
+
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+    <div class="results-header">
+
+        <h1>🤖 StudyMate AI</h1>
+
+        <p>
+            Your AI-powered study results
+        </p>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         AI SUMMARY
+    =========================================== -->
+
+    {% if summary %}
+
+    <div class="result-card">
+
+
+        <div class="result-heading">
+
+            <h2>📖 AI Summary</h2>
+
+            <span class="result-label">
+                Generated by Gemini
+            </span>
+
+        </div>
+
+
+        <script
+            id="summary-data"
+            type="application/json"
+        >
+            {{ summary | tojson }}
+        </script>
+
+
+        <div
+            id="ai-summary"
+            class="ai-content"
+        >
+
+            <p>
+                Preparing your summary...
+            </p>
+
+        </div>
+
+
+        <!-- IMPORTANT QUESTIONS -->
+
+        {% if not questions %}
+
+        <div class="question-action">
+
+
+            <form
+                action="/questions"
+                method="POST"
+            >
+
+                <input
+                    type="hidden"
+                    name="filename"
+                    value="{{ filename }}"
+                >
+
+
+                <input
+                    type="hidden"
+                    id="summary-hidden"
+                    name="summary"
+                >
+
+
+                <button
+                    type="submit"
+                    class="question-button"
+                >
+
+                    ❓ Generate Important Questions
+
+                </button>
+
+            </form>
+
+
+        </div>
+
+        {% endif %}
+
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- ==========================================
+         IMPORTANT QUESTIONS
+    =========================================== -->
+
+    {% if questions %}
+
+    <div class="result-card">
+
+
+        <div class="result-heading">
+
+            <h2>❓ Important Questions</h2>
+
+            <span class="result-label">
+                Exam Preparation
+            </span>
+
+        </div>
+
+
+        <script
+            id="questions-data"
+            type="application/json"
+        >
+            {{ questions | tojson }}
+        </script>
+
+
+        <div
+            id="important-questions"
+            class="ai-content"
+        >
+
+            <p>
+                Preparing important questions...
+            </p>
+
+        </div>
+
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- ==========================================
+         BACK TO DASHBOARD
+    =========================================== -->
+
+    <div class="result-actions">
+
+        <a
+            href="/dashboard"
+            class="back-result"
+        >
+
+            ← Back to Dashboard
+
+        </a>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        if (
+            typeof marked !== "undefined"
+        ) {
+
+            marked.setOptions({
+
+                gfm: true,
+
+                breaks: true
+
+            });
+
+        }
+
+
+        function formatContent(
+            dataId,
+            outputId
+        ) {
+
+
+            const dataElement =
+                document.getElementById(dataId);
+
+
+            const outputElement =
+                document.getElementById(outputId);
+
+
+            if (
+                !dataElement ||
+                !outputElement
+            ) {
+
+                return;
+
+            }
+
+
+            try {
+
+
+                let content =
+                    JSON.parse(
+                        dataElement.textContent
+                    );
+
+
+                if (
+                    typeof content !== "string"
+                ) {
+
+                    content =
+                        String(content);
+
+                }
+
+
+                /* Remove accidental code fences */
+
+                content =
+                    content.replace(
+                        /^\s*```[a-zA-Z0-9_-]*\s*/i,
+                        ""
+                    );
+
+
+                content =
+                    content.replace(
+                        /\s*```\s*$/i,
+                        ""
+                    );
+
+
+                /* Markdown */
+
+                if (
+                    typeof marked !== "undefined" &&
+                    typeof marked.parse === "function"
+                ) {
+
+                    outputElement.innerHTML =
+                        marked.parse(content);
+
+                }
+
+                else {
+
+                    outputElement.textContent =
+                        content;
+
+                }
+
+
+                /* MathJax */
+
+                if (
+                    window.MathJax &&
+                    typeof window.MathJax.typesetPromise ===
+                    "function"
+                ) {
+
+                    window.MathJax
+                        .typesetPromise([
+                            outputElement
+                        ])
+                        .catch(
+                            function (error) {
+
+                                console.log(
+                                    "MathJax warning:",
+                                    error
+                                );
+
+                            }
+                        );
+
+                }
+
+
+                /* Put summary into hidden form */
+
+                if (
+                    dataId === "summary-data"
+                ) {
+
+                    const hiddenSummary =
+                        document.getElementById(
+                            "summary-hidden"
+                        );
+
+
+                    if (hiddenSummary) {
+
+                        hiddenSummary.value =
+                            content;
+
+                    }
+
+                }
+
+            }
+
+            catch (error) {
+
+
+                console.error(
+                    "Content formatting error:",
+                    error
+                );
+
+
+                outputElement.textContent =
+                    "Unable to display this content.";
+
+            }
+
+        }
+
+
+
+        formatContent(
+            "summary-data",
+            "ai-summary"
+        );
+
+
+        formatContent(
+            "questions-data",
+            "important-questions"
+        );
+
+
+    }
+
+);
+
+</script>
+
+
+</body>
+
+</html>
