@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account - StudyMate AI</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(137, 125, 255, 0.13),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(97, 181, 255, 0.14),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #fbfcff 0%,
+                    #f1f5ff 55%,
+                    #f8f5ff 100%
+                );
+
+            color: #132653;
+        }
+
+        .register-container {
+            width: 92%;
+            max-width: 470px;
+        }
+
+        .register-card {
+            padding: 38px 40px;
+
+            background: rgba(255, 255, 255, 0.92);
+
+            border: 1px solid rgba(220, 225, 245, 0.9);
+
+            border-radius: 28px;
+
+            box-shadow:
+                0 20px 50px rgba(55, 68, 120, 0.13);
+
+            text-align: center;
+        }
+
+        /* =====================================================
+           BRAND
+        ===================================================== */
+
+        .brand-icon {
+            width: 58px;
+            height: 58px;
+
+            margin: 0 auto 14px;
+
+            border-radius: 17px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 31px;
+
+            background: linear-gradient(
+                135deg,
+                #6855f5,
+                #8b6cff
+            );
+
+            box-shadow:
+                0 9px 22px rgba(104, 85, 245, 0.25);
+        }
+
+        .brand-name {
+            font-size: 31px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+
+            color: #142858;
+        }
+
+        .brand-name span {
+            color: #6a55ee;
+        }
+
+        .register-title {
+            margin-top: 22px;
+
+            font-size: 28px;
+            font-weight: 800;
+
+            color: #172b59;
+        }
+
+        .register-subtitle {
+            margin-top: 8px;
+
+            font-size: 15px;
+            line-height: 1.5;
+
+            color: #687594;
+        }
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .register-form {
+            margin-top: 28px;
+
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            color: #304574;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1.5px solid #dce2f1;
+            border-radius: 12px;
+
+            outline: none;
+
+            background: #fbfcff;
+
+            color: #203663;
+
+            font-size: 15px;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #7058ed;
+
+            box-shadow:
+                0 0 0 4px rgba(112, 88, 237, 0.10);
+
+            background: white;
+        }
+
+        /* =====================================================
+           CREATE ACCOUNT BUTTON
+        ===================================================== */
+
+        .create-account-button {
+            width: 100%;
+
+            margin-top: 5px;
+
+            padding: 14px 20px;
+
+            border: none;
+            border-radius: 50px;
+
+            background: linear-gradient(
+                135deg,
+                #6149ed,
+                #7654f4
+            );
+
+            color: white;
+
+            font-size: 16px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 24px rgba(99, 77, 237, 0.25);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .create-account-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 28px rgba(99, 77, 237, 0.32);
+        }
+
+        /* =====================================================
+           LOGIN LINK
+        ===================================================== */
+
+        .login-text {
+            margin-top: 22px;
+
+            font-size: 14px;
+
+            color: #687594;
+        }
+
+        .login-text a {
+            color: #6753ed;
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        .login-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-link {
+            display: inline-block;
+
+            margin-top: 18px;
+
+            color: #687594;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            text-decoration: none;
+
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #6753ed;
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 500px) {
+
+            .register-card {
+                padding: 32px 25px;
+            }
+
+            .brand-name {
+                font-size: 27px;
+            }
+
+            .register-title {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="register-container">
+
+    <div class="register-card">
+
+        <!-- Brand -->
+
+        <div class="brand-icon">
+            🎓
+        </div>
+
+        <div class="brand-name">
+            StudyMate <span>AI</span>
+        </div>
+
+
+        <!-- Heading -->
+
+        <h1 class="register-title">
+            Create Your Account
+        </h1>
+
+        <p class="register-subtitle">
+            Create an account to start your personalized learning journey.
+        </p>
+
+
+        <!-- Registration Form -->
+
+        <form
+            class="register-form"
+            method="POST"
+            action="{{ url_for('register') }}"
+        >
+
+            <div class="form-group">
+
+                <label for="name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="confirm_password">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    placeholder="Confirm your password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="create-account-button"
+            >
+                Create Account
+            </button>
+
+        </form>
+
+
+        <!-- Login -->
+
+        <div class="login-text">
+
+            Already have an account?
+
+            <a href="{{ url_for('login') }}">
+                Login
+            </a>
+
+        </div>
+
+
+        <!-- Back -->
+
+        <a
+            href="{{ url_for('account_choice') }}"
+            class="back-link"
+        >
+            ← Back
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
