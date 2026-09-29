@@ -469,55 +469,156 @@ def dashboard():
     if "user_id" not in session:
         return redirect(url_for("login"))
 
-    # Get the user's latest uploaded PDF from the database
     connection = get_db_connection()
 
     if connection is None:
         flash("Unable to connect to the database.")
         return redirect(url_for("login"))
 
-    user_pdf = None
-
     try:
 
         cursor = connection.cursor(dictionary=True)
 
-        query = """
-            SELECT filename
-            FROM study_materials
-            WHERE user_id = %s
-            ORDER BY uploaded_at DESC
-            LIMIT 1
-        """
+        user_id = session["user_id"]
+
+
+        # =========================================
+        # 1. NUMBER OF STUDY MATERIALS
+        # =========================================
 
         cursor.execute(
-            query,
-            (session["user_id"],)
+            """
+            SELECT COUNT(*) AS material_count
+            FROM study_materials
+            WHERE user_id = %s
+            """,
+            (user_id,)
         )
 
-        material = cursor.fetchone()
+        material_result = cursor.fetchone()
+
+        material_count = material_result["material_count"]
+
+
+        # =========================================
+        # 2. QUIZ STATISTICS
+        # =========================================
+
+        cursor.execute(
+            """
+            SELECT
+                COUNT(*) AS quiz_count,
+                COALESCE(SUM(score), 0) AS correct_answers,
+                COALESCE(
+                    SUM(total_questions - score),
+                    0
+                ) AS wrong_answers
+            FROM quiz_attempts qa
+            INNER JOIN study_materials sm
+                ON qa.material_id = sm.material_id
+            WHERE sm.user_id = %s
+            """,
+            (user_id,)
+        )
+
+        quiz_result = cursor.fetchone()
+
+        quiz_count = quiz_result["quiz_count"]
+        correct_answers = quiz_result["correct_answers"]
+        wrong_answers = quiz_result["wrong_answers"]
+
+
+        # =========================================
+        # 3. AI TUTOR QUESTIONS
+        # =========================================
+
+        cursor.execute(
+            """
+            SELECT COUNT(*) AS tutor_count
+            FROM tutor_history th
+            INNER JOIN study_materials sm
+                ON th.material_id = sm.material_id
+            WHERE sm.user_id = %s
+            """,
+            (user_id,)
+        )
+
+        tutor_result = cursor.fetchone()
+
+        tutor_count = tutor_result["tutor_count"]
+
+
+        # =========================================
+        # 4. OVERALL PROGRESS
+        # =========================================
+
+        total_quiz_questions = (
+            correct_answers +
+            wrong_answers
+        )
+
+        if total_quiz_questions > 0:
+
+            overall_progress = round(
+                (
+                    correct_answers /
+                    total_quiz_questions
+                ) * 100
+            )
+
+        else:
+
+            overall_progress = 0
+
+
+        # =========================================
+        # 5. CLOSE DATABASE CONNECTION
+        # =========================================
 
         cursor.close()
         connection.close()
 
-        if material:
-            user_pdf = material["filename"]
+
+        # =========================================
+        # 6. SHOW DASHBOARD
+        # =========================================
+
+        return render_template(
+            "dashboard.html",
+
+            user_name=session.get("user_name"),
+
+            overall_progress=overall_progress,
+
+            quiz_count=quiz_count,
+
+            correct_answers=correct_answers,
+
+            wrong_answers=wrong_answers,
+
+            material_count=material_count,
+
+            tutor_count=tutor_count
+        )
+
 
     except Exception as e:
 
-        print("Dashboard database error:", e)
+        print(
+            "Dashboard database error:",
+            e
+        )
 
         if connection:
             connection.close()
 
-        flash("Unable to load your study materials.")
-        return redirect(url_for("login"))
+        flash(
+            "Unable to load your dashboard."
+        )
 
-    return render_template(
-        "dashboard.html",
-        current_pdf=user_pdf,
-        user_name=session.get("user_name")
-    )
+        return redirect(
+            url_for("login")
+        )
 
 
 # ============================================================

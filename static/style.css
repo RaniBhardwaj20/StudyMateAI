@@ -15,667 +15,685 @@ body {
 
 
 
-/* =========================================
-   DASHBOARD PAGE
-========================================= */
+/* =================================================
+   PROFESSIONAL STUDYMATE AI DASHBOARD
+================================================= */
 
 .dashboard-page {
-
+    margin: 0;
+    padding: 0;
     min-height: 100vh;
-
     background:
-        linear-gradient(
-            135deg,
-            #071b49,
-            #06366d,
-            #087bb5
-        );
-
-    color: white;
-
-    padding: 35px 25px;
+        radial-gradient(circle at 0% 0%, rgba(96, 165, 250, 0.16), transparent 25%),
+        radial-gradient(circle at 100% 0%, rgba(139, 92, 246, 0.13), transparent 25%),
+        #f6f9fd;
+    color: #183b6b;
+    font-family: Arial, Helvetica, sans-serif;
 }
-
-
-
-/* =========================================
-   MAIN CONTAINER
-========================================= */
 
 .dashboard-container {
-
-    width: 96%;
-
-    max-width: 1600px;
-
+    width: 92%;
+    max-width: 1250px;
     margin: 0 auto;
+    padding: 32px 0 55px;
 }
 
-
-
-/* =========================================
+/* =================================================
    HEADER
-========================================= */
+================================================= */
 
 .dashboard-header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 60px 12px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
 
+.dashboard-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-
-    margin-bottom: 28px;
+    gap: 3px;
 }
 
-
-.dashboard-header h1 {
-
-    font-size: 36px;
-
-    font-weight: 700;
-
-    margin-bottom: 6px;
+.dashboard-logo {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+        135deg,
+        #e6f0ff,
+        #eef0ff
+    );
+    border-radius: 16px;
+    font-size: 30px;
+    margin-bottom: 3px;
 }
 
-
-.dashboard-header p {
-
-    font-size: 18px;
-
-    color: #ffffff;
+.dashboard-brand-text h1 {
+    margin: 0;
+    color: #123b78;
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -0.7px;
 }
 
+.dashboard-brand-text p {
+    margin: 5px 0 0;
+    color: #42628c;
+    font-size: 17px;
+    font-weight: 500;
+}
 
+.dashboard-brand-text p::first-letter {
+    color: #2457a6;
+}
 
-/* =========================================
+/* =================================================
+   THREE DOT MENU
+================================================= */
+
+.dashboard-menu {
+    position: absolute;
+    right: 4px;
+    top: 8px;
+}
+
+.menu-button {
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.82);
+    color: #183b6b;
+    font-size: 27px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 5px 16px rgba(35, 71, 120, 0.10);
+}
+
+.menu-button:hover {
+    background: #ffffff;
+    transform: translateY(-1px);
+}
+
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 55px;
+    width: 215px;
+    background: #ffffff;
+    border: 1px solid #dfe7f2;
+    border-radius: 13px;
+    box-shadow: 0 12px 30px rgba(26, 55, 95, 0.15);
+    overflow: hidden;
+    z-index: 100;
+}
+
+.menu-dropdown.show {
+    display: block;
+}
+
+.menu-dropdown a {
+    display: block;
+    padding: 14px 17px;
+    color: #344b68;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.menu-dropdown a:hover {
+    background: #f2f6fc;
+    color: #174b8f;
+}
+
+/* =================================================
+   DASHBOARD INTRO
+================================================= */
+
+.dashboard-intro {
+    margin: 28px 4px 18px;
+}
+
+.dashboard-intro h2 {
+    margin: 0;
+    color: #123b78;
+    font-size: 29px;
+    font-weight: 750;
+    letter-spacing: -0.3px;
+}
+
+.dashboard-intro p {
+    margin: 7px 0 0;
+    color: #536b89;
+    font-size: 16px;
+}
+
+/* =================================================
    UPLOAD CARD
-========================================= */
+================================================= */
 
 .upload-card {
-
-    width: 100%;
-
+    position: relative;
+    overflow: hidden;
     background:
         linear-gradient(
-            135deg,
-            #087bb5,
-            #0870a5
+            110deg,
+            #dff3ff 0%,
+            #e8f2ff 48%,
+            #e9e5ff 100%
         );
-
-    border: 1px solid #19d7ff;
-
-    border-radius: 25px;
-
-    padding: 30px;
-
+    border: 1px solid #b9d7f7;
+    border-radius: 17px;
+    padding: 28px 27px;
     margin-bottom: 25px;
-
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 22px rgba(41, 91, 145, 0.08);
 }
 
-
-
-/* =========================================
-   UPLOAD HEADING
-========================================= */
-
-.upload-heading h2 {
-
-    font-size: 28px;
-
-    margin-bottom: 4px;
+.upload-card::after {
+    content: "";
+    position: absolute;
+    width: 210px;
+    height: 210px;
+    right: -80px;
+    bottom: -110px;
+    background: rgba(112, 137, 255, 0.12);
+    border-radius: 50%;
 }
 
-
-.upload-heading p {
-
-    font-size: 16px;
-
-    margin-bottom: 18px;
+.upload-title-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
 }
 
+.upload-main-icon {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.78);
+    border-radius: 14px;
+    font-size: 27px;
+    box-shadow: 0 4px 12px rgba(37, 89, 145, 0.08);
+}
 
+.upload-card h2 {
+    margin: 0;
+    color: #123b78;
+    font-size: 24px;
+    font-weight: 750;
+}
 
-/* =========================================
-   UPLOAD FORM
-========================================= */
+.upload-card p {
+    margin: 6px 0 0;
+    color: #41638c;
+    font-size: 15px;
+}
 
 .upload-form {
-
-    width: 100%;
-
-    min-height: 90px;
-
-    border: 1px dashed rgba(255, 255, 255, 0.65);
-
-    border-radius: 18px;
-
-    padding: 14px 20px;
-
     display: flex;
-
     align-items: center;
-
-    gap: 12px;
-
-    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 22px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.48);
+    border: 1px dashed #b5cee9;
+    border-radius: 13px;
+    position: relative;
+    z-index: 2;
 }
-
-
-
-/* =========================================
-   NORMAL UPLOAD FORM
-========================================= */
-
-#file-name {
-
-    font-size: 15px;
-
-    color: white;
-
-    flex: 1;
-
-    min-width: 150px;
-}
-
-
-
-/* =========================================
-   CURRENT UPLOAD ROW
-========================================= */
-
-.current-upload {
-
-    justify-content: flex-start;
-
-    min-height: 76px;
-
-    padding: 12px 20px;
-}
-
-
-
-/* =========================================
-   CURRENT PDF
-========================================= */
-
-.current-pdf {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    padding: 12px 16px;
-
-    background:
-        rgba(255, 255, 255, 0.12);
-
-    border-radius: 12px;
-
-    font-size: 16px;
-
-    white-space: nowrap;
-}
-
-
-.current-pdf strong {
-
-    margin-left: 2px;
-}
-
-
-.pdf-icon {
-
-    font-size: 17px;
-}
-
-
-
-/* =========================================
-   BUTTONS
-========================================= */
 
 .feature-button {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: #ffffff;
-
-    color: #08315f;
-
     border: none;
-
-    border-radius: 14px;
-
-    padding: 13px 22px;
-
-    font-size: 16px;
-
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 14px;
     font-weight: 700;
-
-    text-decoration: none;
-
     cursor: pointer;
-
     transition: 0.2s ease;
-
-    white-space: nowrap;
 }
-
-
-.feature-button:hover {
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-
-
-/* =========================================
-   SELECT PDF BUTTON
-========================================= */
 
 .select-button {
-
-    background: #ffb000;
-
-    color: #082b56;
+    background: rgba(255, 255, 255, 0.82);
+    color: #1761ae;
+    border: 1px solid #c8def5;
 }
 
-
-
-/* =========================================
-   UPLOAD PDF BUTTON
-========================================= */
+.select-button:hover {
+    background: #ffffff;
+}
 
 .upload-button {
-
-    background: #ffffff;
-
-    color: #08315f;
-}
-
-
-
-/* =========================================
-   REPLACE PDF BUTTON
-========================================= */
-
-.replace-button {
-
-    background: #ffb000;
-
-    color: #082b56;
-}
-
-
-
-/* =========================================
-   REMOVE PDF BUTTON
-========================================= */
-
-.remove-button {
-
-    background: #ffffff;
-
-    color: #08315f;
-}
-
-
-
-/* =========================================
-   FEATURE GRID
-========================================= */
-
-.feature-grid {
-
-    width: 100%;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap: 18px;
-
-    margin-top: 25px;
-}
-
-
-
-/* =========================================
-   FEATURE CARDS - BASE
-========================================= */
-
-.feature-card {
-
-    min-height: 220px;
-
-    border-radius: 22px;
-
-    padding: 25px;
-
-    border: 1px solid #20d5ff;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    justify-content: flex-start;
-
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.22);
-
-    transition: 0.2s ease;
-}
-
-
-.feature-card:hover {
-
-    transform: translateY(-4px);
-
-    box-shadow:
-        0 14px 30px rgba(0, 0, 0, 0.30);
-}
-
-
-
-/* =========================================
-   AI TUTOR - BLUE
-========================================= */
-
-.tutor-card {
-
-    background:
-        linear-gradient(
-            135deg,
-            #0757b8,
-            #0876d1
-        );
-
-    border-color: #18d9ff;
-}
-
-
-
-/* =========================================
-   AI SUMMARY - TEAL
-========================================= */
-
-.summary-card {
-
-    background:
-        linear-gradient(
-            135deg,
-            #07929c,
-            #19a9b7
-        );
-
-    border-color: #18e4e9;
-}
-
-
-
-/* =========================================
-   GENERATE QUIZ - ORANGE
-========================================= */
-
-.quiz-card {
-
-    background:
-        linear-gradient(
-            135deg,
-            #ed7208,
-            #ff9b22
-        );
-
-    border-color: #ffbd22;
-}
-
-
-
-/* =========================================
-   MY PROGRESS - PURPLE
-========================================= */
-
-.progress-card {
-
-    background:
-        linear-gradient(
-            135deg,
-            #7138d1,
-            #7c4be5
-        );
-
-    border-color: #c06cff;
-}
-
-
-
-/* =========================================
-   FEATURE ICON
-========================================= */
-
-.feature-icon {
-
-    font-size: 40px;
-
-    margin-bottom: 14px;
-}
-
-
-
-/* =========================================
-   FEATURE TITLE
-========================================= */
-
-.feature-card h2 {
-
-    font-size: 27px;
-
-    margin-bottom: 10px;
-}
-
-
-
-/* =========================================
-   FEATURE DESCRIPTION
-========================================= */
-
-.feature-card p {
-
-    font-size: 16px;
-
-    line-height: 1.55;
-
-    margin-bottom: 20px;
-
+    margin-left: auto;
+    background: #1164b5;
     color: #ffffff;
-
-    max-width: 650px;
+    box-shadow: 0 5px 12px rgba(17, 100, 181, 0.18);
 }
 
-
-
-/* =========================================
-   FEATURE BUTTON
-========================================= */
-
-.card-button {
-
-    margin-top: auto;
-
-    background: #ffffff;
-
-    color: #08315f;
-
-    padding: 11px 20px;
-
-    border-radius: 13px;
-
-    font-size: 16px;
+.upload-button:hover {
+    background: #0d559b;
+    transform: translateY(-1px);
 }
 
+#file-name {
+    color: #536b89;
+    font-size: 14px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
+/* =================================================
+   STATISTICS GRID
+================================================= */
 
-/* =========================================
-   START MESSAGE
-========================================= */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    margin-bottom: 25px;
+}
 
-.upload-message {
+/* =================================================
+   COMMON STAT CARD
+================================================= */
 
-    margin-top: 25px;
+.stat-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 17px;
+    padding: 25px;
+    min-height: 185px;
+    border: 1px solid;
+    box-shadow: 0 7px 20px rgba(34, 65, 103, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(34, 65, 103, 0.09);
+}
+
+.stat-card::after {
+    content: "";
+    position: absolute;
+    width: 190px;
+    height: 190px;
+    right: -95px;
+    bottom: -105px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* =================================================
+   INDIVIDUAL CARD COLORS
+================================================= */
+
+/* Overall Progress */
+
+.stat-card:nth-child(1) {
+    background: linear-gradient(
+        135deg,
+        #f0f8ff,
+        #e9f5ff
+    );
+    border-color: #c4e1fa;
+}
+
+.stat-card:nth-child(1)::after {
+    background: rgba(76, 170, 235, 0.10);
+}
+
+/* Quiz Performance */
+
+.stat-card:nth-child(2) {
+    background: linear-gradient(
+        135deg,
+        #f8f4ff,
+        #f0ebff
+    );
+    border-color: #ddd1fa;
+}
+
+.stat-card:nth-child(2)::after {
+    background: rgba(139, 92, 246, 0.10);
+}
+
+/* Study Materials */
+
+.stat-card:nth-child(3) {
+    background: linear-gradient(
+        135deg,
+        #f0fcf8,
+        #e8faf4
+    );
+    border-color: #c2eadc;
+}
+
+.stat-card:nth-child(3)::after {
+    background: rgba(45, 190, 142, 0.10);
+}
+
+/* AI Tutor */
+
+.stat-card:nth-child(4) {
+    background: linear-gradient(
+        135deg,
+        #fff8ef,
+        #fff1e4
+    );
+    border-color: #f3d7b8;
+}
+
+.stat-card:nth-child(4)::after {
+    background: rgba(245, 158, 11, 0.10);
+}
+
+/* =================================================
+   STAT ICON
+================================================= */
+
+.stat-icon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 22px;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Blue icon */
+
+.stat-card:nth-child(1) .stat-icon {
+    background: #438fe8;
+    color: #ffffff;
+}
+
+/* Purple icon */
+
+.stat-card:nth-child(2) .stat-icon {
+    background: #8b78e6;
+    color: #ffffff;
+}
+
+/* Green icon */
+
+.stat-card:nth-child(3) .stat-icon {
+    background: #39bd8c;
+    color: #ffffff;
+}
+
+/* Orange icon */
+
+.stat-card:nth-child(4) .stat-icon {
+    background: #f3a329;
+    color: #ffffff;
+}
+
+/* =================================================
+   STAT TEXT
+================================================= */
+
+.stat-card h2 {
+    margin: 0;
+    color: #183b6b;
+    font-size: 20px;
+    font-weight: 750;
+    position: relative;
+    z-index: 2;
+}
+
+.stat-card p {
+    margin: 7px 0 0;
+    color: #536b89;
+    font-size: 14px;
+    position: relative;
+    z-index: 2;
+}
+
+.stat-number {
+    margin-top: 12px;
+    color: #12498c;
+    font-size: 32px;
+    line-height: 1;
+    font-weight: 800;
+    position: relative;
+    z-index: 2;
+}
+
+.progress-value {
+    margin-top: 12px;
+    color: #12498c;
+    font-size: 32px;
+    line-height: 1;
+    font-weight: 800;
+    position: relative;
+    z-index: 2;
+}
+
+/* =================================================
+   PROGRESS BAR
+================================================= */
+
+.progress-bar {
     width: 100%;
-
-    padding: 25px 30px;
-
-    background:
-        rgba(255, 255, 255, 0.10);
-
-    border: 1px solid rgba(255, 255, 255, 0.35);
-
+    height: 9px;
+    margin-top: 13px;
+    background: #dceaf7;
     border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+}
 
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        #56baf1,
+        #3d91e5
+    );
+    border-radius: 20px;
+}
+
+/* =================================================
+   QUIZ SMALL STATS
+================================================= */
+
+.small-stat-row {
+    display: flex;
+    gap: 22px;
+    margin-top: 17px;
+    color: #536b89;
+    font-size: 14px;
+    position: relative;
+    z-index: 2;
+}
+
+/* =================================================
+   RECENT STUDY ACTIVITY
+================================================= */
+
+.recent-activity-card {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(
+            135deg,
+            #f2f7ff,
+            #f4f0ff
+        );
+    border: 1px solid #d2def4;
+    border-radius: 17px;
+    padding: 25px;
+    box-shadow: 0 7px 20px rgba(34, 65, 103, 0.06);
+}
+
+.recent-activity-card::after {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    right: -100px;
+    bottom: -125px;
+    border-radius: 50%;
+    background: rgba(125, 105, 236, 0.09);
+}
+
+.recent-heading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.recent-icon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #7461df;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 21px;
+}
+
+.recent-heading h2 {
+    margin: 0;
+    color: #183b6b;
+    font-size: 21px;
+    font-weight: 750;
+}
+
+.recent-heading p {
+    margin: 5px 0 0;
+    color: #536b89;
+    font-size: 14px;
+}
+
+.activity-empty {
+    margin-top: 20px;
+    padding: 30px;
     text-align: center;
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 13px;
+    border: 1px solid rgba(211, 223, 242, 0.75);
+    position: relative;
+    z-index: 2;
 }
 
-
-.upload-message h2 {
-
-    font-size: 25px;
-
-    margin-bottom: 8px;
+.activity-empty span {
+    font-size: 29px;
 }
 
-
-.upload-message p {
-
-    font-size: 16px;
-
-    line-height: 1.5;
+.activity-empty p {
+    margin: 9px 0 0;
+    color: #536b89;
+    font-size: 15px;
 }
 
-
-
-/* =========================================
+/* =================================================
    RESPONSIVE DESIGN
-========================================= */
+================================================= */
 
 @media (max-width: 800px) {
 
     .dashboard-container {
-
-        width: 95%;
+        width: 94%;
+        padding-top: 22px;
     }
 
-
-    .feature-grid {
-
-        grid-template-columns: 1fr;
+    .dashboard-brand-text h1 {
+        font-size: 32px;
     }
 
-
-    .dashboard-header h1 {
-
-        font-size: 30px;
-    }
-
-
-    .upload-form {
-
-        flex-direction: column;
-
-        align-items: stretch;
-    }
-
-
-    #file-name {
-
-        text-align: center;
-    }
-
-
-    .feature-button {
-
-        width: 100%;
-    }
-
-
-    .current-upload {
-
-        flex-direction: column;
-
-        align-items: stretch;
-    }
-
-
-    .current-pdf {
-
-        justify-content: center;
-
-        white-space: normal;
-
-        flex-wrap: wrap;
-    }
-
-}
-
-
-
-@media (max-width: 500px) {
-
-    .dashboard-page {
-
-        padding: 20px 10px;
-    }
-
-
-    .dashboard-container {
-
-        width: 100%;
-    }
-
-
-    .dashboard-header h1 {
-
-        font-size: 26px;
-    }
-
-
-    .dashboard-header p {
-
+    .dashboard-brand-text p {
         font-size: 15px;
     }
 
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .dashboard-container {
+        width: 94%;
+    }
+
+    .dashboard-header {
+        padding-left: 45px;
+        padding-right: 45px;
+    }
+
+    .dashboard-brand-text h1 {
+        font-size: 27px;
+    }
+
+    .dashboard-brand-text p {
+        font-size: 14px;
+    }
+
+    .dashboard-logo {
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+    }
+
+    .dashboard-menu {
+        right: 0;
+    }
+
+    .dashboard-intro h2 {
+        font-size: 24px;
+    }
 
     .upload-card {
-
-        padding: 20px;
+        padding: 21px;
     }
 
-
-    .feature-card {
-
-        padding: 22px;
-
-        min-height: 260px;
+    .upload-form {
+        flex-wrap: wrap;
     }
 
-
-    .feature-card h2 {
-
-        font-size: 23px;
+    .upload-button {
+        margin-left: 0;
+        width: 100%;
     }
 
+    #file-name {
+        width: 100%;
+    }
+
+    .stat-card {
+        min-height: 170px;
+        padding: 21px;
+    }
+
+    .small-stat-row {
+        gap: 14px;
+    }
 }
 
 

@@ -2,328 +2,361 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Dashboard - StudyMate AI</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 
 <body class="dashboard-page">
 
+
     <div class="dashboard-container">
 
 
         <!-- =========================================
-             CENTERED HEADER
+             DASHBOARD HEADER
         ========================================== -->
 
         <div class="dashboard-header">
 
-            <h1>🎓 Welcome, {{ user_name }}!</h1>
+            <div class="dashboard-brand">
 
-            <p>Your AI-powered smart study assistant</p>
+                <div class="dashboard-logo">
+                    🎓
+                </div>
 
-        </div>
+                <div class="dashboard-brand-text">
 
+                    <h1>
+                        StudyMate AI
+                    </h1>
 
+                    <p>
+                        Welcome {{ user_name }}!
+                    </p>
 
-        <!-- =========================================
-             MY STUDY MATERIALS
-        ========================================== -->
-
-        <div class="upload-card">
-
-            <div class="upload-heading">
-
-                <h2>📚 My Study Materials</h2>
-
-                <p>
-                    Upload one PDF and use it for your AI-powered study tools.
-                </p>
+                </div>
 
             </div>
 
 
+            <!-- THREE DOT MENU -->
 
-            <!-- =====================================
-                 NO PDF UPLOADED
-            ====================================== -->
+            <div class="dashboard-menu">
 
-            {% if not current_pdf %}
-
-            <form action="/upload"
-                  method="POST"
-                  enctype="multipart/form-data"
-                  class="upload-form"
-                  id="upload-form">
-
-                <label for="pdf-file"
-                       class="feature-button select-button">
-
-                    📄 Select PDF
-
-                </label>
-
-                <input type="file"
-                       id="pdf-file"
-                       name="pdf_file"
-                       accept=".pdf"
-                       hidden
-                       required>
-
-                <span id="file-name">
-
-                    No file selected
-
-                </span>
-
-
-                <button type="submit"
-                        class="feature-button upload-button">
-
-                    Upload PDF
-
+                <button
+                    type="button"
+                    class="menu-button"
+                    onclick="toggleMenu()"
+                    aria-label="Open menu"
+                >
+                    ⋮
                 </button>
 
-            </form>
 
+                <div
+                    id="dashboard-menu"
+                    class="menu-dropdown"
+                >
 
-            <!-- =====================================
-                 PDF ALREADY UPLOADED
-            ====================================== -->
+                    <a href="#">
+                        👤 My Account
+                    </a>
 
-            {% else %}
+                    <a href="#">
+                        ℹ️ About StudyMate AI
+                    </a>
 
-            <div class="upload-form current-upload">
-
-
-                <!-- CURRENT PDF -->
-
-                <div class="current-pdf">
-
-                    <span class="pdf-icon">📄</span>
-
-                    <strong>Current PDF:</strong>
-
-                    <span>
-                        {{ current_pdf }}
-                    </span>
+                    <a href="#">
+                        🚪 Logout
+                    </a>
 
                 </div>
 
-
-
-                <!-- REPLACE PDF -->
-
-                <form action="/upload"
-                      method="POST"
-                      enctype="multipart/form-data"
-                      id="replace-form">
-
-                    <label for="replace-file"
-                           class="feature-button replace-button">
-
-                        🔄 Replace PDF
-
-                    </label>
-
-                    <input type="file"
-                           id="replace-file"
-                           name="pdf_file"
-                           accept=".pdf"
-                           hidden
-                           required>
-
-                </form>
-
-
-
-                <!-- REMOVE PDF -->
-
-                <form action="/clear-pdf"
-                      method="POST"
-                      style="display: inline;">
-
-                    <button type="submit"
-                            class="feature-button remove-button">
-
-                        🗑️ Remove PDF
-
-                    </button>
-
-                </form>
-
-
             </div>
-
-            {% endif %}
 
         </div>
 
 
-
         <!-- =========================================
-             FEATURE CARDS
+             DASHBOARD SUBTITLE
         ========================================== -->
 
-        {% if current_pdf %}
+        <div class="dashboard-intro">
 
-        <div class="feature-grid">
-
-
-            <!-- =====================================
-                 AI TUTOR
-            ====================================== -->
-
-            <div class="feature-card tutor-card">
-
-                <div class="feature-icon">
-                    🤖
-                </div>
-
-                <h2>AI Tutor</h2>
-
-                <p>
-                    Ask questions and learn with AI using your uploaded
-                    study material.
-                </p>
-
-                <a href="/ask"
-                   class="feature-button card-button">
-
-                    Ask a Question
-
-                </a>
-
-            </div>
-
-
-
-            <!-- =====================================
-                 AI SUMMARY
-            ====================================== -->
-
-            <div class="feature-card summary-card">
-
-                <div class="feature-icon">
-                    ✨
-                </div>
-
-                <h2>AI Summary</h2>
-
-                <p>
-                    Get a simple, exam-friendly summary from your
-                    uploaded PDF.
-                </p>
-
-                <a href="/summary"
-                   class="feature-button card-button">
-
-                    Generate Summary
-
-                </a>
-
-            </div>
-
-
-
-            <!-- =====================================
-                 GENERATE QUIZ
-            ====================================== -->
-
-            <div class="feature-card quiz-card">
-
-                <div class="feature-icon">
-                    📝
-                </div>
-
-                <h2>Generate Quiz</h2>
-
-                <p>
-                    Practice your study material with AI-generated
-                    questions.
-                </p>
-
-                <a href="/quiz"
-                   class="feature-button card-button">
-
-                    Generate Quiz
-
-                </a>
-
-            </div>
-
-
-
-            <!-- =====================================
-                 MY PROGRESS
-            ====================================== -->
-
-            <div class="feature-card progress-card">
-
-                <div class="feature-icon">
-                    📊
-                </div>
-
-                <h2>My Progress</h2>
-
-                <p>
-                    Track your learning progress and quiz performance.
-                </p>
-
-                <a href="/progress"
-                   class="feature-button card-button">
-
-                    View Progress
-
-                </a>
-
-            </div>
-
-
-        </div>
-
-        {% endif %}
-
-
-
-        <!-- =========================================
-             START MESSAGE
-        ========================================== -->
-
-        {% if not current_pdf %}
-
-        <div class="upload-message">
-
-            <h2>📖 Start Your Study Journey</h2>
+            <h2>
+                Your Study Dashboard
+            </h2>
 
             <p>
-                Upload your study PDF above to unlock
-                AI Summary, AI Tutor, Quiz and Progress.
+                Manage your study materials and track your learning progress.
             </p>
 
         </div>
 
-        {% endif %}
+
+        <!-- =========================================
+             UPLOAD NEW STUDY MATERIAL
+        ========================================== -->
+
+        <div class="upload-card">
+
+
+            <div class="upload-heading">
+
+                <div class="upload-title-row">
+
+                    <div class="upload-main-icon">
+                        📚
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Upload New Study Material
+                        </h2>
+
+                        <p>
+                            Upload a PDF and start learning with
+                            StudyMate AI.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <form
+                action="{{ url_for('upload') }}"
+                method="POST"
+                enctype="multipart/form-data"
+                class="upload-form"
+                id="upload-form"
+            >
+
+                <label
+                    for="pdf-file"
+                    class="feature-button select-button"
+                >
+                    📄 Select PDF
+                </label>
+
+
+                <input
+                    type="file"
+                    id="pdf-file"
+                    name="pdf_file"
+                    accept=".pdf"
+                    hidden
+                    required
+                >
+
+
+                <span id="file-name">
+                    No file selected
+                </span>
+
+
+                <button
+                    type="submit"
+                    class="feature-button upload-button"
+                >
+                    Upload PDF
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- =========================================
+             STATISTICS
+        ========================================== -->
+
+        <div class="stats-grid">
+
+
+            <!-- OVERALL PROGRESS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📊
+                </div>
+
+                <h2>
+                    Overall Progress
+                </h2>
+
+                <div class="progress-value">
+                    {{ overall_progress }}%
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        style="width: {{ overall_progress }}%;"
+                    ></div>
+
+                </div>
+
+                <p>
+                    Your overall learning progress
+                </p>
+
+            </div>
+
+
+            <!-- QUIZ PERFORMANCE -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📝
+                </div>
+
+                <h2>
+                    Quiz Performance
+                </h2>
+
+                <div class="stat-number">
+                    {{ quiz_count }}
+                </div>
+
+                <p>
+                    Quizzes completed
+                </p>
+
+                <div class="small-stat-row">
+
+                    <span>
+                        ✅ {{ correct_answers }} Correct
+                    </span>
+
+                    <span>
+                        ❌ {{ wrong_answers }} Wrong
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- STUDY MATERIALS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📚
+                </div>
+
+                <h2>
+                    Study Materials
+                </h2>
+
+                <div class="stat-number">
+                    {{ material_count }}
+                </div>
+
+                <p>
+                    PDFs uploaded
+                </p>
+
+            </div>
+
+
+            <!-- AI TUTOR -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🤖
+                </div>
+
+                <h2>
+                    AI Tutor Activity
+                </h2>
+
+                <div class="stat-number">
+                    {{ tutor_count }}
+                </div>
+
+                <p>
+                    Questions asked
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =========================================
+             RECENT ACTIVITY
+        ========================================== -->
+
+        <div class="recent-activity-card">
+
+            <div class="recent-heading">
+
+                <div class="recent-icon">
+                    🕒
+                </div>
+
+                <div>
+
+                    <h2>
+                        Recent Study Activity
+                    </h2>
+
+                    <p>
+                        Your recent learning activity will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="activity-empty">
+
+                <span>
+                    📖
+                </span>
+
+                <p>
+                    Keep studying to build your activity history.
+                </p>
+
+            </div>
+
+        </div>
 
 
     </div>
 
 
-
     <!-- =========================================
-         JAVASCRIPT
+         DASHBOARD JAVASCRIPT
     ========================================== -->
 
     <script>
 
         /* -----------------------------------------
-           NORMAL PDF UPLOAD
-        ----------------------------------------- */
+           PDF FILE NAME
+        ------------------------------------------ */
 
         const pdfFile =
             document.getElementById("pdf-file");
@@ -334,47 +367,19 @@
 
         if (pdfFile && fileName) {
 
-            pdfFile.addEventListener("change", function () {
-
-                if (this.files.length > 0) {
-
-                    fileName.textContent =
-                        this.files[0].name;
-
-                } else {
-
-                    fileName.textContent =
-                        "No file selected";
-
-                }
-
-            });
-
-        }
-
-
-
-        /* -----------------------------------------
-           REPLACE PDF
-           Selecting a file automatically uploads it
-        ----------------------------------------- */
-
-        const replaceFile =
-            document.getElementById("replace-file");
-
-        const replaceForm =
-            document.getElementById("replace-form");
-
-
-        if (replaceFile && replaceForm) {
-
-            replaceFile.addEventListener(
+            pdfFile.addEventListener(
                 "change",
                 function () {
 
                     if (this.files.length > 0) {
 
-                        replaceForm.submit();
+                        fileName.textContent =
+                            this.files[0].name;
+
+                    } else {
+
+                        fileName.textContent =
+                            "No file selected";
 
                     }
 
@@ -382,6 +387,56 @@
             );
 
         }
+
+
+        /* -----------------------------------------
+           THREE DOT MENU
+        ------------------------------------------ */
+
+        function toggleMenu() {
+
+            const menu =
+                document.getElementById(
+                    "dashboard-menu"
+                );
+
+            menu.classList.toggle("show");
+
+        }
+
+
+        /* -----------------------------------------
+           CLOSE MENU WHEN CLICKING OUTSIDE
+        ------------------------------------------ */
+
+        document.addEventListener(
+            "click",
+            function (event) {
+
+                const menu =
+                    document.getElementById(
+                        "dashboard-menu"
+                    );
+
+                const button =
+                    document.querySelector(
+                        ".menu-button"
+                    );
+
+
+                if (
+                    menu &&
+                    button &&
+                    !menu.contains(event.target) &&
+                    !button.contains(event.target)
+                ) {
+
+                    menu.classList.remove("show");
+
+                }
+
+            }
+        );
 
     </script>
 
