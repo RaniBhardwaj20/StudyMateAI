@@ -1527,3 +1527,485 @@ body {
     }
 
 }
+
+/* =================================================
+   MY ACCOUNT PAGE
+================================================= */
+
+.account-page {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 0% 0%,
+            rgba(96, 165, 250, 0.15),
+            transparent 27%
+        ),
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(139, 92, 246, 0.12),
+            transparent 27%
+        ),
+        #f6f9fd;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: #183b6b;
+}
+
+.account-container {
+    width: 92%;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 35px 0 55px;
+}
+
+
+/* =================================================
+   HEADER
+================================================= */
+
+.account-header {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.account-back-button {
+    display: inline-block;
+
+    color: #2457a6;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-bottom: 22px;
+}
+
+.account-back-button:hover {
+    color: #123b78;
+}
+
+.account-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.account-icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #e5f1ff,
+        #eeeaff
+    );
+
+    border-radius: 15px;
+
+    font-size: 27px;
+}
+
+.account-title h1 {
+    margin: 0;
+
+    color: #123b78;
+
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.account-title p {
+    margin: 6px 0 0;
+
+    color: #536b89;
+
+    font-size: 14px;
+}
+
+
+/* =================================================
+   ACCOUNT CARD
+================================================= */
+
+.account-card {
+    background: #ffffff;
+
+    border: 1px solid #dce6f2;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 10px 30px rgba(34, 65, 103, 0.08);
+}
+
+
+/* =================================================
+   PROFILE
+================================================= */
+
+.profile-section {
+    display: flex;
+    align-items: center;
+
+    gap: 17px;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid #e8eef5;
+}
+
+.profile-avatar {
+    width: 68px;
+    height: 68px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #438fe8,
+            #7461df
+        );
+
+    color: #ffffff;
+
+    font-size: 28px;
+    font-weight: 800;
+
+    box-shadow:
+        0 6px 16px rgba(67, 143, 232, 0.22);
+}
+
+.profile-name h2 {
+    margin: 0;
+
+    color: #183b6b;
+
+    font-size: 23px;
+}
+
+.profile-name p {
+    margin: 5px 0 0;
+
+    color: #718198;
+
+    font-size: 14px;
+}
+
+
+/* =================================================
+   ACCOUNT INFORMATION
+================================================= */
+
+.account-information {
+    padding: 27px 0;
+}
+
+.account-information h3 {
+    margin: 0 0 17px;
+
+    color: #263f60;
+
+    font-size: 19px;
+}
+
+
+/* =================================================
+   INFORMATION ROW
+================================================= */
+
+.account-info-row {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 16px 0;
+
+    border-bottom: 1px solid #edf1f6;
+}
+
+.account-info-row:last-child {
+    border-bottom: none;
+}
+
+.info-icon {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eef5ff;
+
+    border-radius: 11px;
+
+    font-size: 19px;
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.info-label {
+    color: #7a899d;
+
+    font-size: 12px;
+}
+
+.info-value {
+    color: #263f60;
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/* =================================================
+   ACCOUNT ACTIONS
+================================================= */
+
+.account-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding-top: 24px;
+
+    border-top: 1px solid #e8eef5;
+}
+
+.account-logout-button,
+.account-dashboard-button {
+    display: inline-block;
+
+    padding: 11px 18px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.account-logout-button {
+    background: #fff0f0;
+
+    color: #c23b3b;
+
+    border: 1px solid #f2cccc;
+}
+
+.account-logout-button:hover {
+    background: #ffe4e4;
+}
+
+.account-dashboard-button {
+    background: #eef4ff;
+
+    color: #2457a6;
+
+    border: 1px solid #d5e3f8;
+}
+
+.account-dashboard-button:hover {
+    background: #e2edff;
+}
+
+
+/* =================================================
+   ACCOUNT RESPONSIVE DESIGN
+================================================= */
+
+@media (max-width: 600px) {
+
+    .account-container {
+        width: 94%;
+        padding-top: 25px;
+    }
+
+    .account-card {
+        padding: 22px;
+    }
+
+    .account-title h1 {
+        font-size: 27px;
+    }
+
+    .account-title p {
+        font-size: 13px;
+    }
+
+    .account-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .account-logout-button,
+    .account-dashboard-button {
+        text-align: center;
+    }
+}
+
+/* =================================================
+   DELETE ACCOUNT PAGE
+================================================= */
+
+.delete-account-page {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 0% 0%,
+            rgba(96, 165, 250, 0.15),
+            transparent 27%
+        ),
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(239, 68, 68, 0.10),
+            transparent 27%
+        ),
+        #f6f9fd;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: #183b6b;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-account-container {
+    width: 92%;
+    max-width: 520px;
+}
+
+.delete-account-card {
+    background: #ffffff;
+    border: 1px solid #dce6f2;
+    border-radius: 20px;
+    padding: 38px;
+    text-align: center;
+    box-shadow: 0 12px 35px rgba(34, 65, 103, 0.10);
+}
+
+.delete-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff0f0;
+    border-radius: 50%;
+
+    font-size: 30px;
+}
+
+.delete-account-card h1 {
+    margin: 0;
+    color: #183b6b;
+    font-size: 27px;
+    font-weight: 800;
+}
+
+.delete-warning {
+    margin: 18px auto 8px;
+    max-width: 410px;
+
+    color: #536b89;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.delete-note {
+    margin: 0;
+    color: #c23b3b;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.delete-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.delete-cancel-button,
+.delete-confirm-button {
+    padding: 11px 20px;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.delete-cancel-button {
+    background: #eef4ff;
+    color: #2457a6;
+    border: 1px solid #d5e3f8;
+}
+
+.delete-cancel-button:hover {
+    background: #e2edff;
+}
+
+.delete-confirm-button {
+    background: #fff0f0;
+    color: #c23b3b;
+    border: 1px solid #f2cccc;
+}
+
+.delete-confirm-button:hover {
+    background: #ffe4e4;
+}
+
+@media (max-width: 600px) {
+
+    .delete-account-card {
+        padding: 28px 22px;
+    }
+
+    .delete-account-card h1 {
+        font-size: 24px;
+    }
+
+    .delete-actions {
+        flex-direction: column;
+    }
+
+    .delete-cancel-button,
+    .delete-confirm-button {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+}

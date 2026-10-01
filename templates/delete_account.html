@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Delete Account - StudyMate AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="delete-account-page">
+
+    <div class="delete-account-container">
+
+        <div class="delete-account-card">
+
+            <div class="delete-icon">
+                🗑️
+            </div>
+
+            <h1>Delete Your Account?</h1>
+
+            <p class="delete-warning">
+                This will permanently delete your StudyMate AI account
+                and your associated study data.
+            </p>
+
+            <p class="delete-note">
+                This action cannot be undone.
+            </p>
+
+            <div class="delete-actions">
+
+                <a href="{{ url_for('account') }}"
+                   class="delete-cancel-button">
+                    Cancel
+                </a>
+
+                <form action="{{ url_for('delete_account') }}"
+                    method="POST"
+                    onsubmit="return confirmDelete();">
+
+                    <button type="submit"
+                        class="delete-confirm-button">
+                        🗑️ Delete Account
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        function confirmDelete() {
+
+            return confirm(
+            "Are you sure you want to permanently delete your StudyMate AI account?"
+            );
+        }
+    </script>
+
+</body>
+
+</html>

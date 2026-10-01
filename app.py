@@ -373,6 +373,211 @@ def login():
 
 
 # ============================================================
+# LOGOUT
+# ============================================================
+
+@app.route("/logout")
+def logout():
+
+    # Clear the user's login session
+    session.clear()
+
+    # Return to the Get Started page
+    return redirect(url_for("home"))
+
+# ============================================================
+# ACCOUNT
+# ============================================================
+
+@app.route("/account")
+def account():
+
+    # Check if the user is logged in
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    connection = get_db_connection()
+
+    if connection is None:
+        flash("Unable to connect to the database.")
+        return redirect(url_for("login"))
+
+    try:
+
+        cursor = connection.cursor(dictionary=True)
+
+        cursor.execute(
+            """
+            SELECT
+                name,
+                email,
+                created_at
+            FROM users
+            WHERE user_id = %s
+            """,
+            (session["user_id"],)
+        )
+
+        user = cursor.fetchone()
+
+        cursor.close()
+        connection.close()
+
+        if user is None:
+            session.clear()
+            flash("Account not found.")
+            return redirect(url_for("login"))
+
+        return render_template(
+            "account.html",
+            user=user
+        )
+
+    except Exception as e:
+
+        print("Account database error:", e)
+
+        if connection:
+            connection.close()
+
+        flash("Unable to load your account.")
+        return redirect(url_for("dashboard"))
+
+
+# ============================================================
+# DELETE ACCOUNT
+# ============================================================
+
+@app.route("/delete-account", methods=["GET", "POST"])
+def delete_account():
+
+    # Make sure the user is logged in
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    # Show the confirmation page
+    if request.method == "GET":
+        return render_template("delete_account.html")
+
+    # --------------------------------------------------------
+    # Delete the account
+    # --------------------------------------------------------
+
+    user_id = session["user_id"]
+
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash("Unable to connect to the database.")
+
+        return redirect(url_for("account"))
+
+    try:
+
+        cursor = connection.cursor(dictionary=True)
+
+        # ----------------------------------------------------
+        # Get all PDFs belonging to this user
+        # ----------------------------------------------------
+
+        cursor.execute(
+            """
+            SELECT filename
+            FROM study_materials
+            WHERE user_id = %s
+            """,
+            (user_id,)
+        )
+
+        materials = cursor.fetchall()
+
+        # ----------------------------------------------------
+        # Delete the user's database account
+        #
+        # The related records are automatically removed
+        # because the tables use ON DELETE CASCADE.
+        # ----------------------------------------------------
+
+        cursor.execute(
+            """
+            DELETE FROM users
+            WHERE user_id = %s
+            """,
+            (user_id,)
+        )
+
+        connection.commit()
+
+        cursor.close()
+        connection.close()
+
+        # ----------------------------------------------------
+        # Delete the user's uploaded PDF files
+        # ----------------------------------------------------
+
+        for material in materials:
+
+            filename = material["filename"]
+
+            file_path = os.path.join(
+                app.config["UPLOAD_FOLDER"],
+                filename
+            )
+
+            if os.path.exists(file_path):
+
+                try:
+
+                    os.remove(file_path)
+
+                except Exception as e:
+
+                    print(
+                        "Could not delete PDF:",
+                        filename,
+                        e
+                    )
+
+        # ----------------------------------------------------
+        # Clear the current application data
+        # ----------------------------------------------------
+
+        global current_pdf
+        global current_pdf_text
+        global current_summary
+        global current_questions
+        global current_chat_history
+
+        current_pdf = None
+        current_pdf_text = None
+        current_summary = None
+        current_questions = None
+        current_chat_history = []
+
+        # ----------------------------------------------------
+        # Clear the login session
+        # ----------------------------------------------------
+
+        session.clear()
+
+        flash("Your StudyMate AI account has been deleted.")
+
+        return redirect(url_for("home"))
+
+    except Exception as e:
+
+        print("Account deletion error:", e)
+
+        if connection:
+            connection.close()
+
+        flash("Unable to delete your account.")
+
+        return redirect(url_for("account"))
+
+
+# ============================================================
 # REGISTER
 # ============================================================
 

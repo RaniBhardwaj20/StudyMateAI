@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Account - StudyMate AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="account-page">
+
+    <div class="account-container">
+
+        <!-- Page Header -->
+        <div class="account-header">
+
+            <a href="{{ url_for('dashboard') }}"
+               class="account-back-button">
+                ← Dashboard
+            </a>
+
+            <div class="account-title">
+                <div class="account-icon">👤</div>
+
+                <div>
+                    <h1>My Account</h1>
+                    <p>Manage and view your StudyMate AI account details.</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Account Card -->
+        <div class="account-card">
+
+            <div class="profile-section">
+
+                <div class="profile-avatar">
+                    {{ user.name[0] | upper }}
+                </div>
+
+                <div class="profile-name">
+                    <h2>{{ user.name }}</h2>
+                    <p>StudyMate AI Student</p>
+                </div>
+
+            </div>
+
+
+            <!-- Account Information -->
+
+            <div class="account-information">
+
+                <h3>Account Information</h3>
+
+
+                <div class="account-info-row">
+
+                    <div class="info-icon">
+                        👤
+                    </div>
+
+                    <div class="info-content">
+                        <span class="info-label">
+                            Full Name
+                        </span>
+
+                        <span class="info-value">
+                            {{ user.name }}
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="account-info-row">
+
+                    <div class="info-icon">
+                        ✉️
+                    </div>
+
+                    <div class="info-content">
+                        <span class="info-label">
+                            Email Address
+                        </span>
+
+                        <span class="info-value">
+                            {{ user.email }}
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="account-info-row">
+
+                    <div class="info-icon">
+                        📅
+                    </div>
+
+                    <div class="info-content">
+                        <span class="info-label">
+                            Account Created
+                        </span>
+
+                        <span class="info-value">
+                            {{ user.created_at.strftime('%d %B %Y') }}
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Logout -->
+
+            <div class="account-actions">
+
+                <a href="{{ url_for('logout') }}"
+                   class="account-logout-button">
+                    🚪 Logout
+                </a>
+
+                <a href="{{ url_for('delete_account') }}"
+                    class="account-delete-button">
+                    🗑️ Delete Account
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
