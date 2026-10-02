@@ -663,12 +663,62 @@
                 grid-column: span 2;
             }
         }
+
+        /* =====================================================
+        FLASH MESSAGE
+        ===================================================== */
+
+        .landing-messages {
+            position: fixed;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            z-index: 1000;
+
+            width: min(90%, 500px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .landing-message.hide {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .landing-message {
+            padding: 13px 20px;
+
+            background: #eaf8ef;
+            color: #267342;
+
+            border: 1px solid #c7ead3;
+            border-radius: 10px;
+
+            text-align: center;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            box-shadow: 0 8px 22px rgba(40, 90, 55, 0.10);
+        }
     </style>
 </head>
 
 <body>
 
 <div class="landing-page">
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="landing-messages">
+                {% for message in messages %}
+                    <div class="landing-message" id="landing-message">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
 
     <!-- Decorative shapes -->
     <div class="shape-left"></div>
@@ -894,6 +944,16 @@
     </section>
 
 </div>
+
+<script>
+    setTimeout(function () {
+        const message = document.getElementById("landing-message");
+
+        if (message) {
+            message.classList.add("hide");
+        }
+    }, 4000);
+</script>
 
 </body>
 </html>
